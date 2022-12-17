@@ -66,14 +66,16 @@ for episode in range(total_episodes):
         # If done (if we're dead) : finish episode
         if done == True: 
             break
+
+        # total_rewards/steps
         
     # Reduce epsilon (because we need less and less exploration)
     epsilon = min_epsilon + (max_epsilon - min_epsilon)*np.exp(-decay_rate*episode) 
     rewards.append(total_rewards)
 
 end_time = time.time()
-x = np.arange(rewards.len())
-plt.plot(rewards)
+x = np.arange(len(rewards))
+plt.plot(x, rewards)
 plt.show()
 
 print ("Zeit:", round(end_time-start_time, 2), " Sek")
