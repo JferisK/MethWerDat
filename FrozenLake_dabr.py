@@ -71,10 +71,11 @@ for episode in range(total_episodes):
     epsilon = min_epsilon + (max_epsilon - min_epsilon)*np.exp(-decay_rate*episode) 
     rewards.append(total_rewards)
 
+end_time = time.time()
 x = np.arange(rewards.len())
 plt.plot(rewards)
 plt.show()
-end_time = time.time()
+
 print ("Zeit:", round(end_time-start_time, 2), " Sek")
 print ("Score over time: " +  str(sum(rewards)/total_episodes))
 print(qtable)
