@@ -15,7 +15,7 @@ qtable = np.zeros((state_size, action_size))
 #print(qtable)
 
 total_episodes = 30000        # Total episodes
-learning_rate = 0.5           # Learning rate
+learning_rate = 0.5          # Learning rate
 max_steps = 500               # Max steps per episode
 gamma = 0.95                  # Discounting rate
 
@@ -27,6 +27,7 @@ decay_rate = 0.0001           # Exponential decay rate for exploration prob
 
 # List of rewards
 rewards = []
+rewards_step = []
 
 # 2 For life or until learning is stopped
 
@@ -72,13 +73,14 @@ for episode in range(total_episodes):
     # Reduce epsilon (because we need less and less exploration)
     epsilon = min_epsilon + (max_epsilon - min_epsilon)*np.exp(-decay_rate*episode) 
     rewards.append(total_rewards)
+    rewards_step.append(total_rewards/step)
 
 end_time = time.time()
-x = np.arange(len(rewards))
-plt.plot(x, rewards)
-plt.show()
+""" x = np.arange(len(rewards_step))
+plt.plot(x, rewards_step)
+plt.show() """
 
-print ("Zeit:", round(end_time-start_time, 2), " Sek")
+print ("Time:", round(end_time-start_time, 2), " sec")
 print ("Score over time: " +  str(sum(rewards)/total_episodes))
 print(qtable)
 
@@ -86,7 +88,7 @@ print(qtable)
 env = gym.make("FrozenLake-v1",render_mode="human", map_name="8x8")
 env.reset()
 
-for episode in range(5):
+""" for episode in range(5):
     state = env.reset()[0]
     step = 0
     done = False
@@ -108,7 +110,11 @@ for episode in range(5):
             print("Number of steps", step)
             print("Reward",reward)
             break
-        state = new_state
+        state = new_state """
 env.close()
+
+
+
+
 
 
