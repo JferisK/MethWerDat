@@ -85,7 +85,7 @@ print(qtable)
 #env = gym.make("FrozenLake-v1",render_mode="human",map_name="8x8")
 env.reset()
 
-result =0
+result = 0
 for episode in range(1000):
     state = env.reset()[0]
     step = 0
