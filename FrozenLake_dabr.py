@@ -71,7 +71,7 @@ for episode in range(total_episodes):
         
     # Reduce epsilon (because we need less and less exploration)
     epsilon = min_epsilon + (max_epsilon - min_epsilon)*np.exp(-decay_rate*episode) 
-    rewards.append(total_rewards)
+    rewards.append(total_rewards/step)
 
 end_time = time.time()
 x = np.arange(len(rewards))
