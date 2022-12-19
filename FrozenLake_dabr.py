@@ -15,15 +15,15 @@ qtable = np.zeros((state_size, action_size))
 #print(qtable)
 
 total_episodes = 30000        # Total episodes
-learning_rate = 0.5          # Learning rate
+learning_rate = 0.5           # Learning rate
 max_steps = 500               # Max steps per episode
-gamma = 0.95                  # Discounting rate
+gamma = 0.99                 # Discounting rate
 
 # Exploration parameters
 epsilon = 1.0                 # Exploration rate
 max_epsilon = 1.0             # Exploration probability at start
 min_epsilon = 0.01            # Minimum exploration probability 
-decay_rate = 0.0001           # Exponential decay rate for exploration prob
+decay_rate = 0.0001          # Exponential decay rate for exploration prob
 
 # List of rewards
 rewards = []
@@ -76,9 +76,9 @@ for episode in range(total_episodes):
     rewards_step.append(total_rewards/step)
 
 end_time = time.time()
-""" x = np.arange(len(rewards_step))
+x = np.arange(len(rewards_step))
 plt.plot(x, rewards_step)
-plt.show() """
+plt.show() 
 
 print ("Time:", round(end_time-start_time, 2), " sec")
 print ("Score over time: " +  str(sum(rewards)/total_episodes))
