@@ -5,15 +5,11 @@ Created on Wed Dec 14 18:13:01 2022
 @author: Noah
 """
 
-#from IPython.display import HTML
-#HTML('')
-
-
-
 import numpy as np
 import gym
 import random
 
+#Trainfunction
 def train(total_episodes,decay_rate,learning_rate,max_steps,gamma,min_epsilon=0.1,max_epsilon=1,epsilon=1):
     # List of rewards
     qtable = np.zeros((state_size, action_size))
@@ -63,8 +59,7 @@ def train(total_episodes,decay_rate,learning_rate,max_steps,gamma,min_epsilon=0.
     print ("Score over time: " +  str(sum(rewards)/total_episodes))
     return(qtable)
 
-#Play with model
-#env = gym.make("FrozenLake-v1",render_mode="human",map_name="8x8")
+#Testfunction
 def test(qtable,max_steps):
     env.reset()
 
@@ -73,8 +68,6 @@ def test(qtable,max_steps):
         state = env.reset()[0]
         step = 0
         done = False
-        #print("****************************************************")
-        #print("EPISODE ", episode+1)
 
         for step in range(max_steps):
             
@@ -84,37 +77,32 @@ def test(qtable,max_steps):
             new_state, reward, done, truncated, info = env.step(action)
             
             if done:
-                # Here, we decide to only print the last state (to see if our agent is on the goal or fall into an hole)
-                env.render()
-                
                 result += reward
-                # We print the number of step it took.
-                #print("Number of steps", step)
-                #print("Reward",reward)
                 break
             state = new_state
 
     return(result/1000)
 
-
+#Initialize Environement and Params
 env = gym.make("FrozenLake-v1",map_name="8x8")
 action_size = env.action_space.n
 state_size = env.observation_space.n
 
 
-total_episodes = [30000,25000,20000,15000,10000,5000]        # Total episodes
-learning_rate = [0.65,0.8,0.9,0.1,0.5,0.7,0.3]           # Learning rate
-max_steps = [100,200,300,400,500,600]                # Max steps per episode
-gamma = [1,0.95,0.8,0.6,0.4,0.2,0.1,0.3]                  # Discounting rate
+total_episodes = [30000,25000,20000,15000,10000,5000]   # Total episodes
+learning_rate = [0.65,0.8,0.9,0.1,0.5,0.7,0.3]          # Learning rate
+max_steps = [100,200,300,400,500,600]                   # Max steps per episode
+gamma = [1,0.95,0.8,0.6,0.4,0.2,0.1,0.3]                # Discounting rate
 
 # Exploration parameters
-epsilon = 1.0                 # Exploration rate
-max_epsilon = 1.0             # Exploration probability at start
-min_epsilon = 0.01            # Minimum exploration probability 
-decay_rate = [0.0001,0.0005,0.001,0.005,0.01]             # Exponential decay rate for exploration prob
+epsilon = 1.0                                           # Exploration rate
+max_epsilon = 1.0                                       # Exploration probability at start
+min_epsilon = 0.01                                      # Minimum exploration probability 
+decay_rate = [0.0001,0.0005,0.001,0.005,0.01]           # Exponential decay rate for exploration prob
 
 
 test_results=[]
+#Train different Models and test them
 for i in range(200):
     params =[]
     episodes = random.choice(total_episodes)
