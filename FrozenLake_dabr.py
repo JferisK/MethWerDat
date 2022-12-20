@@ -27,6 +27,8 @@ decay_rate = 0.0001          # Exponential decay rate for exploration prob
 
 # List of rewards
 rewards = []
+
+# List of total_rewards/step
 rewards_step = []
 
 # 2 For life or until learning is stopped
@@ -76,6 +78,8 @@ for episode in range(total_episodes):
     rewards_step.append(total_rewards/step)
 
 end_time = time.time()
+
+# creating plot
 x = np.arange(len(rewards_step))
 plt.plot(x, rewards_step)
 plt.show() 
@@ -84,11 +88,13 @@ print ("Time:", round(end_time-start_time, 2), " sec")
 print ("Score over time: " +  str(sum(rewards)/total_episodes))
 print(qtable)
 
-#Play with model
+
+# not needed for parameter testing
+""" #Play with model
 env = gym.make("FrozenLake-v1",render_mode="human", map_name="8x8")
 env.reset()
 
-""" for episode in range(5):
+for episode in range(5):
     state = env.reset()[0]
     step = 0
     done = False
@@ -110,8 +116,8 @@ env.reset()
             print("Number of steps", step)
             print("Reward",reward)
             break
-        state = new_state """
-env.close()
+        state = new_state
+env.close() """
 
 
 
